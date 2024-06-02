@@ -15,6 +15,10 @@ let package = Package(
                 "SynchronizerProtocols"
             ]
         ),
+        .executable(
+            name: "Example",
+            targets: ["Example"]
+        ),
     ],
     dependencies: [
         .package(
@@ -23,6 +27,13 @@ let package = Package(
         )
     ],
     targets: [
+        .executableTarget(
+            name: "Example",
+            dependencies: [
+                "Synchronizer",
+                "SynchronizerProtocols"
+            ]
+        ),
         .macro(
             name: "SynchronizerMacro",
             dependencies: [
@@ -44,6 +55,16 @@ let package = Package(
         ),
         .target(
             name: "SynchronizerProtocols"
+        ),
+        .testTarget(
+            name: "SynchronizerMacroTests",
+            dependencies: [
+                "SynchronizerMacro",
+                .product(
+                    name: "SwiftSyntaxMacrosTestSupport",
+                    package: "swift-syntax"
+                )
+            ]
         )
     ]
 )

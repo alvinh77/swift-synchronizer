@@ -15,7 +15,10 @@ public struct SynchronizerMacro: DeclarationMacro {
         of node: some FreestandingMacroExpansionSyntax,
         in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
-        return []
+        return [
+            """
+            """
+        ]
     }
 }
 
