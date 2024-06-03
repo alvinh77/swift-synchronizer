@@ -5,66 +5,67 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "SwiftSynchronizer",
-    platforms: [.iOS(.v15), .macOS(.v10_15)],
+    name: "swift-synchronizer",
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6),
+        .macCatalyst(.v13)
+    ],
     products: [
         .library(
-            name: "SwiftSynchronizer",
+            name: "SynchronizerMacroInterfaces",
             targets: [
-                "Synchronizer",
-                "SynchronizerProtocols"
+                "SynchronizerMacroInterfaces"
             ]
         ),
         .executable(
-            name: "Example",
-            targets: ["Example"]
+            name: "SynchronizerMacroClient",
+            targets: [
+                "SynchronizerMacroClient"
+            ]
         ),
     ],
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-syntax.git",
-            branch: "main"
-        )
+            from: "509.0.0"
+        ),
     ],
     targets: [
-        .executableTarget(
-            name: "Example",
-            dependencies: [
-                "Synchronizer",
-                "SynchronizerProtocols"
-            ]
-        ),
         .macro(
-            name: "SynchronizerMacro",
+            name: "SynchronizerMacroImplementation",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
                     package: "swift-syntax"
                 ),
                 .product(
-                    name: "SwiftCompilerPlugin", 
+                    name: "SwiftCompilerPlugin",
                     package: "swift-syntax"
                 )
             ]
         ),
         .target(
-            name: "Synchronizer",
+            name: "SynchronizerMacroInterfaces",
             dependencies: [
-                "SynchronizerMacro"
+                "SynchronizerMacroImplementation"
             ]
         ),
-        .target(
-            name: "SynchronizerProtocols"
+        .executableTarget(
+            name: "SynchronizerMacroClient",
+            dependencies: ["SynchronizerMacroInterfaces"]
         ),
         .testTarget(
             name: "SynchronizerMacroTests",
             dependencies: [
-                "SynchronizerMacro",
+                "SynchronizerMacroImplementation",
                 .product(
                     name: "SwiftSyntaxMacrosTestSupport",
                     package: "swift-syntax"
-                )
+                ),
             ]
-        )
+        ),
     ]
 )
