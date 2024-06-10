@@ -30,7 +30,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-syntax.git",
-            from: "509.0.0"
+            from: "510.0.2"
         ),
     ],
     targets: [
@@ -47,15 +47,18 @@ let package = Package(
                 )
             ]
         ),
+        .executableTarget(
+            name: "SynchronizerMacroClient",
+            dependencies: ["SynchronizerMacroInterfaces"]
+        ),
         .target(
             name: "SynchronizerMacroInterfaces",
             dependencies: [
                 "SynchronizerMacroImplementation"
             ]
         ),
-        .executableTarget(
-            name: "SynchronizerMacroClient",
-            dependencies: ["SynchronizerMacroInterfaces"]
+        .target(
+            name: "SynchronizerProtocols"
         ),
         .testTarget(
             name: "SynchronizerMacroTests",
