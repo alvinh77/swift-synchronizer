@@ -6,7 +6,6 @@
 //
 
 /// A protocol for objects that manage the registration of observers.
-/// - Note: Classes conforming to this protocol should implement the `register(observer:)` method to allow observers to register for updates.
 public protocol ObserverRegistering {
     /// The type of observer that can be registered.
     associatedtype Observer

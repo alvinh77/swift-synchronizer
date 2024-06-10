@@ -6,7 +6,6 @@
 //
 
 /// A protocol for objects that observe changes in a model.
-/// - Note: Classes conforming to this protocol should implement the `didUpdate(model:)` method to handle model updates.
 public protocol Observing: AnyObject {
     /// The type of the model that the observer is interested in.
     associatedtype Model

@@ -25,13 +25,13 @@ let package = Package(
             targets: [
                 "SynchronizerMacroClient"
             ]
-        ),
+        )
     ],
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-syntax.git",
             from: "510.0.2"
-        ),
+        )
     ],
     targets: [
         .macro(
@@ -67,8 +67,8 @@ let package = Package(
                 .product(
                     name: "SwiftSyntaxMacrosTestSupport",
                     package: "swift-syntax"
-                ),
+                )
             ]
-        ),
+        )
     ]
 )

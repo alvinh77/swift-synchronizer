@@ -6,7 +6,6 @@
 //
 
 /// A protocol for objects that notify observers about model changes.
-/// - Note: Classes conforming to this protocol should implement the `sync(sender:model:)` method to synchronize model changes with observers.
 public protocol Notifying {
     /// The type of the model that the notifier will update.
     associatedtype Model
